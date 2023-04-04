@@ -1,5 +1,9 @@
+import FilterablePosts from "@/components/FilterablePosts";
+import { getAllPosts } from "@/service/posts";
 import React from "react";
 
-export default function PostsPage() {
-  return <div>v포슨트 페이지</div>;
+export default async function PostsPage() {
+  const posts = await getAllPosts();
+  const categories = [...new Set(posts.map(({ category }) => category))];
+  return <FilterablePosts posts={posts} categories={categories} />;
 }
